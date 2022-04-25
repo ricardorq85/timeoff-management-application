@@ -8,11 +8,10 @@ pipeline {
                 
                 powershell script: '''vagrant --version 
                 vagrant up'''
-
-
-//                powershell script: '''cd vagrant
-//                vagrant ssh -c 'cd /home/vagrant/ && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' /timeoffapp/ && cd /timeoffapp/ && npm install' 
-//                '''
+				
+                powershell script: '''cd vagrant
+                vagrant ssh -c 'cd /home/vagrant/ && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' && cd timeoff-management-application && npm install' 
+                '''
             }
         }
     }
