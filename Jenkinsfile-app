@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+      string defaultValue: 'a1b686f', name: 'VM_ID', trim: true
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -12,7 +16,6 @@ pipeline {
                         nvm install 13.14.0
                         npm install
                         ls -l
-						//npm publish
                         '''
 //npm publish
 //                      npm start
@@ -21,11 +24,13 @@ pipeline {
 				}
 			}
 		}
+		
 		stage('Deploy') {
 			steps {
 				
-                sh ''' 
-                    vagrant ssh -c 'cd /home/vagrant/ && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' && cd timeoff-management-application && npm install && npm start' 
+                sh '''
+                    vagrant reload ${VM_ID}
+                    vagrant ssh ${VM_ID} -c 'cd /home/vagrant/ && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' && cd timeoff-management-application && npm install && npm start' 
                 '''
             }
         }
