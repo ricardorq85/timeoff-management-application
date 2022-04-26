@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                git 'https://github.com/ricardorq85/timeoff-management-application.git'
+                
+                dir ('timeoff-management-application') {
+                    sh ''' 
+                        . ~/.bashrc
+                        nvm install 13.14.0
+                        npm install
+                        ls -l
+						//npm publish
+                        '''
+//npm publish
+//                      npm start
+//                        &
+///                    '''						
+				}
+			}
+		}
+		stage('Deploy') {
+			steps {
+				
+                sh ''' 
+                    vagrant ssh -c 'cd /home/vagrant/ && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' && cd timeoff-management-application && npm install && npm start' 
+                '''
+            }
+        }
+    }
+}
+

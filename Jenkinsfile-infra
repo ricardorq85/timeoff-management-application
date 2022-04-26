@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Provisioning') {
+            steps {
+                git 'https://github.com/ricardorq85/timeoff-management-application.git'
+                
+                dir ('timeoff-management-application') {                
+					sh '''
+						vagrant --version 
+						vagrant up
+					'''
+				}
+			}
+        }
+    }
+}
+
