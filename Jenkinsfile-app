@@ -30,7 +30,7 @@ pipeline {
 				
                 sh '''
                     vagrant reload ${VM_ID}
-                    vagrant ssh ${VM_ID} -c 'cd /home/vagrant/ && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' && cd timeoff-management-application && npm install && npm start' 
+                    vagrant ssh ${VM_ID} -c 'cd /home/vagrant/  mkdir ${BUILD_NUMBER} cd ${BUILD_NUMBER} && git clone 'https://github.com/ricardorq85/timeoff-management-application.git' && cd timeoff-management-application && npm install && npm start' 
                 '''
             }
         }
