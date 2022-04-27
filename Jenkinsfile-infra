@@ -10,6 +10,7 @@ pipeline {
 					sh '''
 						vagrant --version 
 						vagrant up
+						vagrant global-status
 					'''
 				}
 			}
